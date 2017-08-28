@@ -29,6 +29,11 @@ var HeroDetailComponent = (function () {
             .switchMap(function (params) { return _this.heroService.getHero(+params.get('id')); })
             .subscribe(function (hero) { return _this.hero = hero; });
     };
+    HeroDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.heroService.update(this.hero)
+            .then(function () { return _this.goBack(); });
+    };
     return HeroDetailComponent;
 }());
 __decorate([
@@ -38,7 +43,7 @@ __decorate([
 HeroDetailComponent = __decorate([
     core_1.Component({
         selector: 'hero-detail',
-        template: "\n    <div *ngIf=\"hero\">\n      <h2>{{hero.name}} details!</h2>\n      <div>\n        <label>id: </label>{{hero.id}}</div>\n      <div>\n        <label>name: </label>\n        <input [(ngModel)]=\"hero.name\" placeholder=\"name\" />\n      </div>\n      <button (click)=\"goBack()\">Back</button>\n    </div>\n  "
+        template: "\n    <div *ngIf=\"hero\">\n      <h2>{{hero.name}} details!</h2>\n      <div>\n        <label>id: </label>{{hero.id}}</div>\n      <div>\n        <label>name: </label>\n        <input [(ngModel)]=\"hero.name\" placeholder=\"name\" />\n      </div>\n      <button (click)=\"goBack()\">Back</button>\n    </div>\n    <button (click)=\"save()\">Save</button>\n  "
     }),
     __metadata("design:paramtypes", [hero_service_1.HeroService,
         router_1.ActivatedRoute,
