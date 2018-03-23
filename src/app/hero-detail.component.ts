@@ -20,6 +20,7 @@ import {HeroService} from './hero.service';
       </div>
       <button (click)="goBack()">Back</button>
     </div>
+    <button (click)="save()">Save</button>
   `
 
 })
@@ -31,6 +32,10 @@ export class HeroDetailComponent implements  OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) => this.heroService.getHero(+params.get('id')))
       .subscribe(hero => this.hero = hero);
+  }
+  save(): void {
+    this.heroService.update(this.hero)
+      .then(() => this.goBack());
   }
   @Input() hero: Hero;
   constructor(
